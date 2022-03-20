@@ -1,7 +1,7 @@
 {
-  "name": "turtle",
-  "version": "1.0.0",
-  "description": "\"Wordle\" clone",
+  "name": "mern-boiler",
+  "version": "0.1.0",
+  "description": "MERN app boilerplate",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thenlie/turtle.git"
+    "url": "git+https://github.com/Thenlie/mern-boiler.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Thenlie/turtle/issues"
+    "url": "https://github.com/Thenlie/mern-noiler/issues"
   },
-  "homepage": "https://github.com/Thenlie/turtle#readme",
+  "homepage": "https://github.com/Thenlie/mern-boiler#readme",
   "devDependencies": {
     "concurrently": "^7.0.0"
   }

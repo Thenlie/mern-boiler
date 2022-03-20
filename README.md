@@ -1,4 +1,4 @@
-# MERN Boilerplate
+# MERN Boilerplate ![Project License Badge](https://img.shields.io/badge/license-MIT-brightgreen) ![Project Version Badge](https://img.shields.io/github/package-json/v/thenlie/mern-boiler)
 
 This is a MERN app boilerplate repository. You can clone this repo to get a jump start on your next MERN stack project. Built upon [create-react-app](https://create-react-app.dev/), it comes pre-loaded with express, mongoose, passport.js and fully functional local user authentication utilizing express-session. Look below for installation and usage instructions. 
 
