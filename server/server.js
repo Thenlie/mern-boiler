@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
-  secret: 'somerandomestring',
+  secret: process.env.SECRET,
   cookie: {},
   resave: false,
   saveUninitialized: true,

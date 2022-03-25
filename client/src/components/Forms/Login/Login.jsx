@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../../utils/mutations';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 
 const Login = ({setUser}) => {
     const [email, setEmail] = useState('');

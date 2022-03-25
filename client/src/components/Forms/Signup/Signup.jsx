@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
