@@ -6,6 +6,7 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 const Login = ({setUser}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [login] = useMutation(LOGIN);
 
     const handleLogin = async (evt) => {
@@ -43,6 +44,14 @@ const Login = ({setUser}) => {
                 return;
         }
     };
+
+    const togglePasswordVisible = () => {
+        if (passwordVisible) {
+            setPasswordVisible(false);
+        } else {
+            setPasswordVisible(true);
+        }
+    }
     
     return (
         <section className="p-4 m-4 w-1/3 text-center bg-slate-100 rounded-md">
@@ -50,7 +59,7 @@ const Login = ({setUser}) => {
             {/* login form */}
             <form onSubmit={handleLogin} className='flex flex-col'>
                 <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
-                <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='password' placeholder='password' type='password' value={password}></input>
+                <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='password' placeholder='password' type='password' value={password}></input><div onClick={togglePasswordVisible}>{passwordVisible ? (<EyeIcon width={25}/>) : (<EyeOffIcon width={25}/>)}</div>
                 <button type='submit' className='w-1/4 m-auto p-2 rounded-lg bg-slate-300 hover:bg-slate-400'>Login</button>
             </form>
             {/* state variables */}
