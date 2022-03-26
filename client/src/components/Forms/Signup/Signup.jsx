@@ -11,18 +11,23 @@ const Signup = () => {
 
     const handleSignup = async (evt) => {
         evt.preventDefault();
-        const response = await fetch('/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "username": username,
-                "email": email,
-                "password": password,
-            })
-        });
-        return response;
+        if (password === confirmPassword) {
+            const response = await fetch('/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                })
+            });
+            return response;
+        } else {
+            // toggle error message
+            console.log('passwords must match');
+        }
     };
 
     const handleChange = (evt) => {
@@ -71,8 +76,14 @@ const Signup = () => {
             <form onSubmit={handleSignup} className='flex flex-col'>
                 <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
                 <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
-                <div className='flex items-center'><input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input><div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div></div>
-                <div className='flex items-center'><input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='confirmPassword' placeholder='confirmPassword' type='password' id='confirmPassword' value={confirmPassword}></input><div onClick={toggleConfirmPasswordVisible} className='bg-white p-2'>{confirmPasswordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div></div>
+                <div className='flex items-center'>
+                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input>
+                    <div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
+                </div>
+                <div className='flex items-center'>
+                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='confirmPassword' placeholder='confirmPassword' type='password' id='confirmPassword' value={confirmPassword}></input>
+                    <div onClick={toggleConfirmPasswordVisible} className='bg-white p-2'>{confirmPasswordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
+                </div>
                 <button type='submit' className='w-1/4 m-auto p-2 rounded-lg bg-slate-300 hover:bg-slate-400'>Signup</button>
             </form>
             {/* state variables */}

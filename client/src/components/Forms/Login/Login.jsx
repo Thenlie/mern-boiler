@@ -61,7 +61,10 @@ const Login = ({setUser}) => {
             {/* login form */}
             <form onSubmit={handleLogin} className='flex flex-col'>
                 <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
-                <div className='flex items-center'><input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='login-password' value={password}></input><div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div></div>
+                <div className='flex items-center'>
+                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='login-password' value={password}></input>
+                    <div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
+                </div>
                 <button type='submit' className='w-1/4 m-auto p-2 rounded-lg bg-slate-300 hover:bg-slate-400'>Login</button>
             </form>
             {/* state variables */}
