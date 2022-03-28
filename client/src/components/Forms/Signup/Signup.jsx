@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { EyeIcon, EyeOffIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline';
+import { QUERY_USER } from '../../../utils/queries'; 
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -8,6 +10,10 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const [validUsername, setValidUsername] = useState(true);
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: { username: username }
+    });
 
     const handleSignup = async (evt) => {
         evt.preventDefault();
@@ -69,12 +75,25 @@ const Signup = () => {
         };
     };
 
+    useEffect(() => {
+        if (data) {
+            if (data.user) {
+                setValidUsername(false);
+            } else {
+                setValidUsername(true);
+            }
+        };
+    }, [data])
+
     return (
         <section className="p-4 m-4 w-1/3 text-center bg-slate-100 rounded-md">
             <h2 className='font-bold text-lg mb-2'>Signup</h2>
             {/* signup form */}
             <form onSubmit={handleSignup} className='flex flex-col'>
-                <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
+                <div className='flex items-center'>
+                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
+                    <div className='bg-white p-2'>{validUsername ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
+                </div>
                 <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
                 <div className='flex items-center'>
                     <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input>
