@@ -4,10 +4,13 @@ const { AuthenticationError } = require('apollo-server-express');
 const resolvers = {
     Query: {
         users: async (parent, args, context) => {
-            return await User.find()
+            return await User.find();
+        },
+        user: async (parent, { username }, context) => {
+            return await User.findOne({ username: username});
         },
         me: async (parent, args, context) => {
-            return await User.findOne({ _id: context.session.passport.user})
+            return await User.findOne({ _id: context.session.passport.user});
         },
         loggedIn: async (parent, args, context) => {
             if (context.session.passport.user) {
