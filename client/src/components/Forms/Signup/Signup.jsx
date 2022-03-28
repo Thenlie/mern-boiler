@@ -45,11 +45,6 @@ const Signup = () => {
                 return ;
             case 'email': 
                 setEmail(evt.target.value);
-                if (validator.isEmail(email)) {
-                    setValidEmail(true);
-                } else {
-                    setValidEmail(false);
-                }
                 return ;
             case 'password': 
                 setPassword(evt.target.value);
@@ -82,15 +77,25 @@ const Signup = () => {
         };
     };
 
+    // check if username is available
     useEffect(() => {
         if (data) {
-            if (data.user) {
-                setValidUsername(false);
-            } else {
+            if (!data.user && username.length > 2) {
                 setValidUsername(true);
+            } else {
+                setValidUsername(false);
             }
         };
     }, [data])
+
+    // check if email input is valid
+    useEffect(() => {
+        if (validator.isEmail(email)) {
+            setValidEmail(true);
+        } else {
+            setValidEmail(false);
+        }
+    }, [email]);
 
     return (
         <section className="p-4 m-4 w-1/3 text-center bg-slate-100 rounded-md">
@@ -98,30 +103,23 @@ const Signup = () => {
             {/* signup form */}
             <form onSubmit={handleSignup} className='flex flex-col'>
                 <div className='flex items-center'>
-                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
-                    <div title={validUsername ? ('Username Available!') : ('Username Unavailable!')} className='bg-white p-2'>{validUsername ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
+                    <input className='m-2 p-2 rounded-l-md grow mr-0' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
+                    <div title={validUsername ? ('Username Available') : ('Username Unavailable')} className='bg-white p-2 rounded-r-md'>{validUsername ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
                 </div>
                 <div className='flex items-center'>
-                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
-                    <div title={validEmail ? ('Username Available!') : ('Username Unavailable!')} className='bg-white p-2'>{validEmail ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
+                    <input className='m-2 p-2 rounded-l-md grow mr-0' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
+                    <div title={validEmail ? ('Email Valid') : ('Email Invalid')} className='bg-white p-2 rounded-r-md'>{validEmail ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
                 </div>
                 <div className='flex items-center'>
-                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input>
-                    <div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
+                    <input className='m-2 p-2 rounded-l-md grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input>
+                    <div title='Toggle Password Visibility' onClick={togglePasswordVisible} className='bg-white p-2 rounded-r-md'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
                 </div>
                 <div className='flex items-center'>
-                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='confirmPassword' placeholder='confirmPassword' type='password' id='confirmPassword' value={confirmPassword}></input>
-                    <div onClick={toggleConfirmPasswordVisible} className='bg-white p-2'>{confirmPasswordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
+                    <input className='m-2 p-2 rounded-l-md grow mr-0' onChange={handleChange} name='confirmPassword' placeholder='confirmPassword' type='password' id='confirmPassword' value={confirmPassword}></input>
+                    <div title='Toggle Password Visibility' onClick={toggleConfirmPasswordVisible} className='bg-white p-2 rounded-r-md'>{confirmPasswordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
                 </div>
                 <button type='submit' className='w-1/4 m-auto p-2 rounded-lg bg-slate-300 hover:bg-slate-400'>Signup</button>
             </form>
-            {/* state variables */}
-            <div className='test-info'>
-                <p className='font-bold text-left'>Username: <span className='font-normal'>{username}</span></p>
-                <p className='font-bold text-left'>Email: <span className='font-normal'>{email}</span></p>
-                <p className='font-bold text-left'>Password: <span className='font-normal'>{password}</span></p>
-                <p className='font-bold text-left'>Confirm Password: <span className='font-normal'>{confirmPassword}</span></p>
-            </div>
         </section>
     )
 };
