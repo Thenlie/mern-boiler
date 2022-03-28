@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { EyeIcon, EyeOffIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline';
 import { QUERY_USER } from '../../../utils/queries'; 
+import validator from 'validator';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -10,7 +11,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-    const [validUsername, setValidUsername] = useState(true);
+    const [validUsername, setValidUsername] = useState(false);
+    const [validEmail, setValidEmail] = useState(false);
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { username: username }
     });
@@ -43,6 +45,11 @@ const Signup = () => {
                 return ;
             case 'email': 
                 setEmail(evt.target.value);
+                if (validator.isEmail(email)) {
+                    setValidEmail(true);
+                } else {
+                    setValidEmail(false);
+                }
                 return ;
             case 'password': 
                 setPassword(evt.target.value);
@@ -92,9 +99,12 @@ const Signup = () => {
             <form onSubmit={handleSignup} className='flex flex-col'>
                 <div className='flex items-center'>
                     <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='username' placeholder='username' type='text' value={username}></input>
-                    <div className='bg-white p-2'>{validUsername ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
+                    <div title={validUsername ? ('Username Available!') : ('Username Unavailable!')} className='bg-white p-2'>{validUsername ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
                 </div>
-                <input className='m-2 p-2 rounded-sm' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
+                <div className='flex items-center'>
+                    <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='email' placeholder='email' type='email' value={email}></input>
+                    <div title={validEmail ? ('Username Available!') : ('Username Unavailable!')} className='bg-white p-2'>{validEmail ? (<CheckCircleIcon width={25} className='stroke-green-400'/>) : (<XCircleIcon width={25} className='stroke-red-400'/>)}</div>
+                </div>
                 <div className='flex items-center'>
                     <input className='m-2 p-2 rounded-sm grow mr-0' onChange={handleChange} name='password' placeholder='password' type='password' id='password' value={password}></input>
                     <div onClick={togglePasswordVisible} className='bg-white p-2'>{passwordVisible ? (<EyeIcon width={25} className='stroke-slate-500'/>) : (<EyeOffIcon width={25} className='stroke-slate-500'/>)}</div>
