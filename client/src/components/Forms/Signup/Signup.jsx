@@ -35,7 +35,7 @@ const Signup = () => {
         } else {
             // toggle error message
             console.log('passwords must match');
-        }
+        };
     };
 
     const handleChange = (evt) => {
@@ -54,7 +54,7 @@ const Signup = () => {
                 return ;
             default: 
                 return;
-        }
+        };
     };
 
     const togglePasswordVisible = () => {
@@ -84,7 +84,7 @@ const Signup = () => {
                 setValidUsername(true);
             } else {
                 setValidUsername(false);
-            }
+            };
         };
     }, [data])
 
@@ -94,7 +94,7 @@ const Signup = () => {
             setValidEmail(true);
         } else {
             setValidEmail(false);
-        }
+        };
     }, [email]);
 
     return (
@@ -121,7 +121,7 @@ const Signup = () => {
                 <button type='submit' className='w-1/4 m-auto p-2 rounded-lg bg-slate-300 hover:bg-slate-400'>Signup</button>
             </form>
         </section>
-    )
+    );
 };
 
 export default Signup;

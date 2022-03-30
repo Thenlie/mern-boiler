@@ -8,7 +8,7 @@ const Navigation = () => {
                 <li className='list-none m-5 text-xl hover:text-slate-500'><Link to={'/forms'}>Forms</Link></li>
             </ul>
         </nav>
-    )
+    );
 };
 
 export default Navigation;
