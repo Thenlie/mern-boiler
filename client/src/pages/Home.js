@@ -40,7 +40,7 @@ const Home = ({user}) => {
                 </section>
             </div>
         </main>        
-    )
+    );
 };
 
 export default Home;

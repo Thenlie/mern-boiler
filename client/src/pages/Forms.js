@@ -12,13 +12,13 @@ const Forms = ({user, setUser}) => {
                     <h2 className='font-bold text-lg mb-2'>Logged In User ID</h2>
                     {user ? (
                         <p>{user}</p>
-                        ) : (
-                            <p>Not logged in</p>
-                            )}
+                    ) : (
+                        <p>Not logged in</p>
+                    )}
                 </section>
             </div>
         </main>
-    )
+    );
 };
 
 export default Forms;
